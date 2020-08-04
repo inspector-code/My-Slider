@@ -1,0 +1,33 @@
+@import "normalize.scss";
+
+*, ::before, ::after {
+  box-sizing: border-box;
+}
+
+.wrapper {
+  width: 600px;
+  margin: 0 auto;
+}
+
+.slider-container {
+  overflow: hidden;
+}
+
+.slider-track {
+  display: flex;
+  transition: .6s;
+}
+
+.slider-item {
+  min-width: 100%;
+  height: 300px;
+  background-color: aquamarine;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 200px;
+}
+
+.slider-buttons {
+  text-align: center;
+}
