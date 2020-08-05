@@ -1,10 +1,6 @@
 //SETTINGS
-const slideTimer = 0 // 0 = off
+const slideTimer = 3500 // 0 = off
 //END SETTINGS
-
-let position = 0
-let slideNumber = 0
-let prevSlideNumber = 0
 
 const sliderContainer = document.querySelector('.slider-container')
 const sliderTrack = document.querySelector('.slider-track')
@@ -15,7 +11,9 @@ const sliderFooter = document.querySelector('.slider-footer')
 
 const slidesCount = sliderTrack.children.length
 const slideWidth = sliderContainer.clientWidth
-const trackWidth = slideWidth * slidesCount
+
+let slideNumber = 1
+let position = 0
 
 for (let i = 1; i < slidesCount; i++) {
     let div = document.createElement('div')
@@ -23,28 +21,38 @@ for (let i = 1; i < slidesCount; i++) {
     sliderFooter.append(div)
 }
 
-const trackIt = () => {
-    sliderTrack.style.transform = `translateX(${position}px)`
+const controlPoints = document.querySelectorAll('.control-point')
+controlPoints.forEach((item, index) => {
+    item.addEventListener('click', () => {
+        trackIt(index + 1)
+        sliderTrack.style.transform = `translateX(-${position}px)`
+        for (let i = 0; i < controlPoints.length; i++) {
+            controlPoints[i].classList.remove('active-point')
+        }
+        item.classList.add('active-point')
+    })
+})
+
+function trackIt(number) {
+    position = number*slideWidth - slideWidth
+    slideNumber = number
+    sliderTrack.style.transform = `translateX(-${position}px)`
     sliderFooter.children[slideNumber - 1].classList.add('active-point')
-    sliderFooter.children[prevSlideNumber - 1].classList.remove('active-point')
-    console.log(prevSlideNumber)
-    console.log(slideNumber)
 }
 
-const trackDirection = (direction) => {
-
+function trackDirection(direction) {
     switch (direction) {
         case 'prev':
-            position === 0 ? position = slideWidth - trackWidth : position += slideWidth
-            slideNumber = Math.abs(position / slideWidth) + 1
-            prevSlideNumber === 2 || prevSlideNumber === 0 ? prevSlideNumber = 1 : prevSlideNumber = slideNumber + 1
-            trackIt()
+            slideNumber === 1 ? slideNumber = slidesCount : --slideNumber
+            slideNumber === slidesCount ? sliderFooter.children[0].classList.remove('active-point')
+                : sliderFooter.children[slideNumber].classList.remove('active-point')
+            trackIt(slideNumber)
             break
         case 'next':
-            position === slideWidth - trackWidth ? position = 0 : position -= slideWidth
-            slideNumber = Math.abs(position / slideWidth) + 1
-            prevSlideNumber === sliderFooter.children.length - 1 ? prevSlideNumber = sliderFooter.children.length : prevSlideNumber = slideNumber - 1
-            trackIt()
+            slideNumber === slidesCount ? slideNumber = 1 : ++slideNumber
+            slideNumber === 1 ? sliderFooter.children[slidesCount - 1].classList.remove('active-point')
+                : sliderFooter.children[slideNumber - 2].classList.remove('active-point')
+            trackIt(slideNumber)
             break
         default:
             break
@@ -59,21 +67,21 @@ prevBtn.addEventListener('click', () => {
     trackDirection('prev')
 })
 
-const trackInterval = (time) => {
+function trackInterval(time) {
     if (time !== 0) {
-        let iterval = setInterval(() => trackDirection('next'), time)
+        let interval = setInterval(() => trackDirection('next'), time)
+
         sliderWrapper.addEventListener('mouseover', () => {
-            clearInterval(iterval)
+            clearInterval(interval)
         })
 
         sliderWrapper.addEventListener('mouseout', () => {
-            iterval = setInterval(() => trackDirection('next'), time)
+            interval = setInterval(() => trackDirection('next'), time)
         })
     }
 }
 
 trackInterval(slideTimer)
-
 
 
 

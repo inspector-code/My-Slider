@@ -40,10 +40,20 @@
 }
 
 .arrow {
-  border: solid black;
+  cursor: pointer;
+  border: solid #a9a9a9;
   border-width: 0 3px 3px 0;
   display: inline-block;
   padding: 9px;
+  opacity: 0.6;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &:active {
+    opacity: 1;
+  }
 }
 
 .right {
@@ -57,13 +67,18 @@
 }
 
 .control-point {
+  cursor: pointer;
   height: 15px;
   width: 15px;
   margin: 10px 5px 10px;
   border-radius: 50%;
-  background-color: black;
+  background-color: #CBCBCB;
+
+  &:hover {
+    background-color: #96B1D8;
+  }
 }
 
 .active-point {
-  background-color: red !important;
+  background-color: #4B5E81 !important;
 }

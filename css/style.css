@@ -334,10 +334,16 @@ template {
     width: 100%; }
 
 .arrow {
-  border: solid black;
+  cursor: pointer;
+  border: solid #a9a9a9;
   border-width: 0 3px 3px 0;
   display: inline-block;
-  padding: 9px; }
+  padding: 9px;
+  opacity: 0.6; }
+  .arrow:hover {
+    opacity: 0.8; }
+  .arrow:active {
+    opacity: 1; }
 
 .right {
   transform: rotate(-45deg);
@@ -348,11 +354,14 @@ template {
   -webkit-transform: rotate(135deg); }
 
 .control-point {
+  cursor: pointer;
   height: 15px;
   width: 15px;
   margin: 10px 5px 10px;
   border-radius: 50%;
-  background-color: black; }
+  background-color: #CBCBCB; }
+  .control-point:hover {
+    background-color: #96B1D8; }
 
 .active-point {
-  background-color: red !important; }
+  background-color: #4B5E81 !important; }
