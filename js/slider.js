@@ -77,7 +77,7 @@ window.onload = () => {
                 clearInterval(interval)
             })
 
-            sliderWrapper.addEventListener('mouseout', () => {
+            sliderWrapper.addEventListener('mouseleave', () => {
                 interval = setInterval(() => trackDirection('next'), time)
             })
         }
