@@ -1,3 +1,5 @@
+"use strict"
+
 //SETTINGS
 const slideTimer = 3500 // 0 = off
 //END SETTINGS
