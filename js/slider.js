@@ -28,8 +28,8 @@ window.onload = () => {
         item.addEventListener('click', () => {
             trackIt(index + 1)
             sliderTrack.style.transform = `translateX(-${position}px)`
-            for (let i = 0; i < controlPoints.length; i++) {
-                controlPoints[i].classList.remove('active-point')
+            for (let elem of controlPoints) {
+                elem.classList.remove('active-point')
             }
             item.classList.add('active-point')
         })
